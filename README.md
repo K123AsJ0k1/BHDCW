@@ -4,7 +4,7 @@ This repository stores the code for a data collection website created by the gro
 
 # Overview 
 
-The application allows users to view arbitrary texts stored in the database, create markings on these texts, store these markings in the database, edit earlier markings, give these markings for AI training purposes, comment on the text and talk with other users in a forum. This application can be used by many users at the same time and its users are either admins or regulars. 
+The application allows users to view arbitrary texts stored in the database, create markings on these texts, edit these texts along side marking them, save these markings/edits in the database, give these markings for AI training purposes, comment on the text and talk with other users in a forum. This application can be used by many users at the same time and its users are either admins or regulars. 
 
 # Documentation 
 
