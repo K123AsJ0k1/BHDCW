@@ -8,13 +8,13 @@ The application allows users to view arbitrary texts stored in the database, cre
 
 # Documentation 
 
-User manual
+![User manual](https://github.com/K123AsJ0k1/BHDCW/blob/main/Documentation/Architectural%20description.md)
 
-Requirments specification
+![Requirments specification](https://github.com/K123AsJ0k1/BHDCW/blob/main/Documentation/Requirments%20specification.md)
 
-Architectural description
+![Architectural description](https://github.com/K123AsJ0k1/BHDCW/blob/main/Documentation/Testing.md)
 
-Testing
+![Testing](https://github.com/K123AsJ0k1/BHDCW/blob/main/Documentation/Testing.md)
 
-Working time accounting
+![Working time accounting](https://github.com/K123AsJ0k1/BHDCW/blob/main/Documentation/Working%20time%20accounting.md)
 
