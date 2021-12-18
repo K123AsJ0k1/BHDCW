@@ -12,7 +12,7 @@ The application allows users to view arbitrary texts stored in the database, cre
 
 ![Requirments specification](https://github.com/K123AsJ0k1/BHDCW/blob/main/Documentation/Requirments%20specification.md)
 
-![Architectural description](https://github.com/K123AsJ0k1/BHDCW/blob/main/Documentation/Testing.md)
+![Architectural description](https://github.com/K123AsJ0k1/BHDCW/blob/main/Documentation/Architectural%20description.md)
 
 ![Testing](https://github.com/K123AsJ0k1/BHDCW/blob/main/Documentation/Testing.md)
 
