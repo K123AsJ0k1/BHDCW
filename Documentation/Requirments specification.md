@@ -4,7 +4,7 @@
 
 ---
 
-The application allows marking, editing, discussion and AI training dataset collection regarding arbitrary texts. It has only two users, which are the super admin, the admins and the editors.
+The application allows marking, editing, discussion and AI training dataset collection regarding arbitrary texts. It has only three user types, which are the super admin, the admins and the editors.
 
 **The features of the application**
 
