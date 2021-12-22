@@ -9,3 +9,12 @@ CREATE TABLE users (
 	    last_login TIMESTAMP,
 		misc TEXT
 );
+
+CREATE TABLE texts (
+	id SERIAL PRIMARY KEY,
+	user_id INTEGER REFERENCES users,
+	content TEXT,
+	date TIMESTAMP,
+	last_use TIMESTAMP,
+	misc TEXT
+);
