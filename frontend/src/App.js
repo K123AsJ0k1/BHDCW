@@ -8,7 +8,6 @@ import Main from "./pages/Main"
 import Login from "./pages/Login"
 import SignUp from "./pages/SignUp"
 
-
 function App() {
   return (
     <BrowserRouter>

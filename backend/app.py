@@ -1,12 +1,13 @@
 from flask import Flask
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 
 app = Flask(__name__)
 cors = CORS(app)
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['CORS_HEADERS'] = 'Content-Type'
+#app.config['CORS_HEADERS'] = 'Content-Type'
 
 import routes
 
-if __name__ == '__main__':
-    app.run(debug = True)
+#if __name__ == '__main__':
+#    app.run(debug = True)
