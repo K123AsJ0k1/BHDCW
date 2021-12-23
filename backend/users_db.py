@@ -14,7 +14,7 @@ def create_user():
         print(e)
         return False
 
-def activate_user(code,username,password,role):
+def signup_user(code,username,password,role):
     try:
         sql = "SELECT id FROM users WHERE username=:username"
         result = db.session.execute(sql, {"username":username})
@@ -38,6 +38,24 @@ def activate_user(code,username,password,role):
         sql = "UPDATE users SET active=:active, username=:username, password=:password, role=:role, date=:date, last_login=:last_login WHERE id=:id"
         db.session.execute(sql, {"id":user[0], "active":'true', "username": username, "password": hash_value, "role": role, "date": date, "last_login": date})
         db.session.commit()
+
+        return 1
+    except Exception as e:
+        print(e)
+        return 0
+
+def login_user(username,password):
+    try:
+        sql = "SELECT password FROM users WHERE username=:username"
+        result = db.session.execute(sql, {"username":username})
+        user_password = result.fetchone()
+
+        if user_password == None:
+            return -1
+        
+        hash_value = user_password[0]
+        if not check_password_hash(hash_value,password):
+           return -2
 
         return 1
     except Exception as e:

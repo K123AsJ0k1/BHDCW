@@ -7,10 +7,10 @@ const BACKEND_URL = 'http://127.0.0.1:5000/'
 const validate = values => {
     const errors = {};
     
-    if (!values.codes) {
-        errors.codes = 'Required';
-    } else if (values.codes.length < 29) {
-        errors.codes = 'Must be 29 characters or more';
+    if (!values.code) {
+        errors.code = 'Required';
+    } else if (values.code.length < 29) {
+        errors.code = 'Must be 29 characters or more';
     }
     
     if (!values.username) {
@@ -28,11 +28,6 @@ const validate = values => {
     return errors;
 };
 
-const activateUser = async () => {
-    let res = await axios.post(BACKEND_URL + '/activate_user')
-    console.log(res.data)
-}
-
 const SignUp = () => {
     const formik = useFormik({
         initialValues: {
@@ -40,8 +35,9 @@ const SignUp = () => {
             username: '',
             password: ''
         },
+        validate,
         onSubmit: values => {
-            let res = axios.post(BACKEND_URL + 'activate_user', values)
+            let res = axios.post(BACKEND_URL + 'signup', values)
             console.log(res.data)
         },
     });
