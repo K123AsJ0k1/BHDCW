@@ -33,7 +33,6 @@ const activateUser = async () => {
     console.log(res.data)
 }
 
-
 const SignUp = () => {
     const formik = useFormik({
         initialValues: {
@@ -42,7 +41,6 @@ const SignUp = () => {
             password: ''
         },
         onSubmit: values => {
-            //alert(JSON.stringify(values,null,2));
             let res = axios.post(BACKEND_URL + 'activate_user', values)
             console.log(res.data)
         },

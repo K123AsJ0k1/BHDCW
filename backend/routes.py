@@ -9,12 +9,28 @@ def root():
     return "Hello world"
 
 @app.route("/activate_user", methods = ['POST','GET'])
-def activate_user():
+def activate():
     if request.method == 'POST':
-        print("print")
         content = request.get_json()
-        print(content)
-        return json.dumps({"Done": "ssad"})
+        
+        code = content['code']
+        username = content['username']
+        password = content['password']
+        role = 0
+        
+        status = activate_user(code,username,password,role)
+        
+        print(status)
+        if (status == 0):
+            return json.dumps({"Status": "Database error"})
+        if (status == -1):
+            return json.dumps({"Status": "User already exists"})
+        if (status == -2): 
+            return json.dumps({"Status": "The given code is wrong"})
+        if (status == -3):
+            return json.dumps({"Status": "The user is already active"})
+
+        return json.dumps({"Status": "Complete"})
 
 @app.route("/create_user", methods = ['POST'])
 def create():
