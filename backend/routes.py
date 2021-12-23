@@ -4,10 +4,6 @@ from users_db import *
 import re
 import json
 
-@app.route("/", methods = ['POST','GET'])
-def root():
-    return "Hello world"
-
 @app.route("/signup", methods = ['POST','GET'])
 def signup():
     if request.method == 'POST':
@@ -40,7 +36,6 @@ def login():
         password = content['password']
 
         status = login_user(username,password)
-        print(status)
         
         if (status == 0):
             return json.dumps({"Status": "Database error"})

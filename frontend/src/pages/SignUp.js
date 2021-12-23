@@ -44,37 +44,39 @@ const SignUp = () => {
     return (
         <div class="center">
             <form onSubmit={formik.handleSubmit}>
-                <label htmlFor="code">Activation code</label>
-                <input
-                    id="code"
-                    name="code"
-                    type="code"
-                    onChange={formik.handleChange}
-                    value={formik.values.code}
-                />
-                {formik.errors.code ? <div>{formik.errors.code}</div> : null}
+                <div class="container">
+                    <label htmlFor="code">Activation code</label>
+                    <input
+                        id="code"
+                        name="code"
+                        type="code"
+                        onChange={formik.handleChange}
+                        value={formik.values.code}
+                    />
+                    {formik.errors.code ? <div>{formik.errors.code}</div> : null}
 
-                <label htmlFor="username">Username</label>
-                <input
-                    id="username"
-                    name="username"
-                    type="username"
-                    onChange={formik.handleChange}
-                    value={formik.values.username}
-                />
-                {formik.errors.username ? <div>{formik.errors.username}</div> : null}
+                    <label htmlFor="username">Username</label>
+                    <input
+                        id="username"
+                        name="username"
+                        type="username"
+                        onChange={formik.handleChange}
+                        value={formik.values.username}
+                    />
+                    {formik.errors.username ? <div>{formik.errors.username}</div> : null}
 
-                <label htmlFor="password">Password</label>
-                <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    onChange={formik.handleChange}
-                    value={formik.values.password}
-                />
-                {formik.errors.password ? <div>{formik.errors.password}</div> : null}
+                    <label htmlFor="password">Password</label>
+                    <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        onChange={formik.handleChange}
+                        value={formik.values.password}
+                    />
+                    {formik.errors.password ? <div>{formik.errors.password}</div> : null}
 
-                <button type="submit">Submit</button>
+                    <button type="submit">Submit</button>
+                </div>
             </form>
         </div>
     );
