@@ -12,6 +12,7 @@ import List from "./pages/List"
 import Tools from "./pages/Tools"
 import Forum from "./pages/Forum"
 import Download from "./pages/Download"
+import Editor from "./pages/Editor"
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="tools" element={<Tools />} />
           <Route path="forum" element={<Forum />} />
           <Route path="download" element={<Download />} />
+          <Route path="editor" element={<Editor />} />
         </Route>
       </Routes>
     </BrowserRouter>

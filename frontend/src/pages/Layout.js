@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { Outlet, Link } from "react-router-dom";
 import '../App.css';
 
@@ -30,6 +29,9 @@ const Layout = () => {
         </li>
         <li>
           <Link to="/download">Download</Link>
+        </li>
+        <li>
+          <Link to="/editor">Editor</Link>
         </li>
       </ul>
 
