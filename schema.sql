@@ -15,6 +15,8 @@ CREATE TABLE texts (
 	user_id INTEGER REFERENCES users,
 	content TEXT,
 	date TIMESTAMP,
-	last_use TIMESTAMP,
+	last_view TIMESTAMP,
+	last_mark TIMESTAMP,
+	last_edit TIMESTAMP,
 	misc TEXT
 );

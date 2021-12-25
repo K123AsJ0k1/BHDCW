@@ -7,8 +7,13 @@ import Welcome from "./pages/Welcome"
 import Main from "./pages/Main"
 import Login from "./pages/Login"
 import SignUp from "./pages/SignUp"
+import Control from "./pages/Control"
+import List from "./pages/List"
+import Tools from "./pages/Tools"
+import Forum from "./pages/Forum"
+import Download from "./pages/Download"
 
-function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -17,6 +22,11 @@ function App() {
           <Route path="main" element={<Main />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
+          <Route path="control" element={<Control />} />
+          <Route path="list" element={<List />} />
+          <Route path="tools" element={<Tools />} />
+          <Route path="forum" element={<Forum />} />
+          <Route path="download" element={<Download />} />
         </Route>
       </Routes>
     </BrowserRouter>
