@@ -10,11 +10,17 @@ const Login = () => {
             username: '',
             password: ''
         },
-        onSubmit: values => {
-            let res = axios.post(BACKEND_URL + 'login', values)
+        onSubmit:async (values) => {
+            let res = await axios.post(BACKEND_URL + 'login', values)
+            localStorage.setItem('username', res.data.username)
             console.log(res.data)
         },
     });
+    let getData = () => {
+        var data = localStorage.getItem('username')
+        alert(data)
+    }
+
     return (
         <div class="center">
             <form onSubmit={formik.handleSubmit}>
@@ -38,6 +44,7 @@ const Login = () => {
                 
                 <button type="submit">Submit</button>
             </form>
+            <button type="submit" onClick={getData}>Show</button>
         </div>
     ); 
 };
