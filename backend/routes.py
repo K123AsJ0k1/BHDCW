@@ -1,59 +1,56 @@
-from flask import request
+from flask import request,jsonify
 from app import app
 from users_db import *
+from texts_db import *
 import re
 import json
 
 @app.route("/signup", methods = ['POST','GET'])
 def signup():
     if request.method == 'POST':
-        content = request.get_json()
+        data = request.get_json()
         
-        code = content['code']
-        username = content['username']
-        password = content['password']
+        code = data['code']
+        username = data['username']
+        password = data['password']
         role = 0
         
-        status = signup_user(code,username,password,role)
+        data_pair = signup_user(code,username,password,role)
         
-        if (status == 0):
-            return json.dumps({"Status": "Database error"})
-        if (status == -1):
-            return json.dumps({"Status": "User already exists"})
-        if (status == -2): 
-            return json.dumps({"Status": "The given code is wrong"})
-        if (status == -3):
-            return json.dumps({"Status": "The user is already active"})
-
-        return json.dumps({"Status": "Complete"})
+        answer = {"status": data_pair['status']}
+        user = get_the_user(data_pair['user_id'])
+        if not user == None:
+            answer.update(get_the_user(data_pair['user_id']))
+        
+        return jsonify(**answer)
 
 @app.route("/login", methods = ['POST','GET'])
 def login():
     if request.method == "POST":
-        content = request.get_json()
-
-        username = content['username']
-        password = content['password']
-
-        status = login_user(username,password)
+        data = request.get_json()
         
-        if (status == 0):
-            return json.dumps({"Status": "Database error"})
-        if (status == -1):
-            return json.dumps({"Status": "User does not exist"})
-        if (status == -2):
-            return json.dumps({"Status": "Password is incorrect"})
-
-        return json.dumps({"Status": "Success"})
+        username = data['username']
+        password = data['password']
+        
+        data_pair = login_user(username,password)
+        
+        answer = {"status": data_pair['status']}
+        user = get_the_user(data_pair['user_id'])
+        if not user == None:
+            answer.update(get_the_user(data_pair['user_id']))
+        
+        return jsonify(**answer)
 
 @app.route("/load", methods = ['POST','GET'])
 def load():
     if request.method == "POST":
-        content = request.get_json()
-
-        text = content['text']
-
-        print(text)
+        data = request.get_json()
+        
+        user_id = 0
+        text_id = 0
+        content = data['text']
+        
+        #status = load_text()
 
         return json.dumps({"Status": "Success"})
 
