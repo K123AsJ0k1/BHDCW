@@ -7,7 +7,7 @@ import Welcome from "./pages/Welcome"
 import Main from "./pages/Main"
 import Login from "./pages/Login"
 import SignUp from "./pages/SignUp"
-import Control from "./pages/Control"
+import Load from "./pages/Load"
 import List from "./pages/List"
 import Tools from "./pages/Tools"
 import Forum from "./pages/Forum"
@@ -23,7 +23,7 @@ const App = () => {
           <Route path="main" element={<Main />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
-          <Route path="control" element={<Control />} />
+          <Route path="load" element={<Load />} />
           <Route path="list" element={<List />} />
           <Route path="tools" element={<Tools />} />
           <Route path="forum" element={<Forum />} />

@@ -9,7 +9,7 @@ const TextEditor = () => {
         () => EditorState.createEmpty(),
       );
       return (
-        <div className="center">
+        <div className="texteditor">
           <Editor
             editorState={editorState}
             onEditorStateChange={setEditorState}

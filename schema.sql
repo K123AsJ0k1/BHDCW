@@ -13,6 +13,7 @@ CREATE TABLE users (
 CREATE TABLE texts (
 	id SERIAL PRIMARY KEY,
 	user_id INTEGER REFERENCES users,
+	text_id INTEGER REFERENCES texts,
 	content TEXT,
 	date TIMESTAMP,
 	last_view TIMESTAMP,

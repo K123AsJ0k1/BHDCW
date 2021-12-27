@@ -45,3 +45,15 @@ def login():
             return json.dumps({"Status": "Password is incorrect"})
 
         return json.dumps({"Status": "Success"})
+
+@app.route("/load", methods = ['POST','GET'])
+def load():
+    if request.method == "POST":
+        content = request.get_json()
+
+        text = content['text']
+
+        print(text)
+
+        return json.dumps({"Status": "Success"})
+
