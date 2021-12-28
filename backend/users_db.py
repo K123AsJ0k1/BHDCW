@@ -4,15 +4,27 @@ from code_generator import *
 from werkzeug.security import check_password_hash, generate_password_hash
 import datetime
 
-def create_user():
+def create_user(role,n,k):
     try:
-        sql = "INSERT INTO users (code,active) VALUES (:code,:active)"
-        db.session.execute(sql, {"code": generate(5,5), "active": '0'})
+        generated_code = None
+        sql = "SELECT id FROM users WHERE code=:code"
+        
+        while (True):
+            generated_code = generate(n,k)
+            result = db.session.execute(sql, {"code":generated_code})
+            query = result.fetchone()
+
+            if query == None:
+                break
+        
+        sql = "INSERT INTO users (code,active,role) VALUES (:code,:active,:role)"
+        db.session.execute(sql, {"code": generated_code, "active": '0', "role": role})
         db.session.commit()
-        return True
+        
+        return {"status": 1, "code": generated_code}
     except Exception as e:
         print(e)
-        return False
+        return {"status": 0, "code": None}
 
 def signup_user(code,username,password,role):
     try:
@@ -71,3 +83,13 @@ def get_the_user(user_id):
     except Exception as e:
         print(e)
         return None    
+
+def get_the_super_user():
+    try:
+        sql = "SELECT id,username,role,date,last_login,misc FROM users WHERE role=2"
+        result = db.session.execute(sql)
+        super_user = result.fetchone()
+        return super_user
+    except Exception as e:
+        print(e)
+        return None  

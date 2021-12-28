@@ -2,14 +2,20 @@ from flask import request,jsonify
 from app import app
 from users_db import *
 from texts_db import *
+from user_creation import *
 import re
 import json
 
 @app.route("/setup", methods = ['POST','GET'])
 def setup():
     if request.method == 'GET':
-        print("Toimii")
-        answer = {"status": 1}
+        data_pair = create_super_admin()
+        
+        if not data_pair == None:
+            answer = data_pair
+            return jsonify(**answer)
+         
+        answer = {"status": -1}    
         return jsonify(**answer)
 
 @app.route("/signup", methods = ['POST','GET'])
