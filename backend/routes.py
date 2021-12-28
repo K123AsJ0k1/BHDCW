@@ -5,6 +5,13 @@ from texts_db import *
 import re
 import json
 
+@app.route("/setup", methods = ['POST','GET'])
+def setup():
+    if request.method == 'GET':
+        print("Toimii")
+        answer = {"status": 1}
+        return jsonify(**answer)
+
 @app.route("/signup", methods = ['POST','GET'])
 def signup():
     if request.method == 'POST':
