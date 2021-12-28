@@ -1,4 +1,5 @@
 import React from 'react';
+import { Navigate } from 'react-router'
 import { Formik, useFormik } from 'formik';
 import '../App.css';
 import axios from 'axios'
@@ -12,29 +13,26 @@ const Login = () => {
         },
         onSubmit:async (values) => {
             let res = await axios.post(BACKEND_URL + 'login', values)
-            if (res.data.status == 0) {
+            if (res.data.status === 0) {
                alert("Database error")
             }
-            if (res.data.status == -1) {
+            if (res.data.status === -1) {
                 alert("No user found") 
             }
-            if (res.data.status == -2) {
+            if (res.data.status === -2) {
                 alert("Wrong password") 
             }
-            if (res.data.status == 1) {
+            if (res.data.status === 1) {
                 localStorage.setItem('user_id', res.data.id)
                 localStorage.setItem('username', res.data.username)
                 localStorage.setItem('role', res.data.role)
                 localStorage.setItem('misc', res.data.misc)
             }
             console.log(res.data)
+            window.location.replace('/main')
         },
     });
-    let getData = () => {
-        var data = localStorage.getItem('username')
-        alert(data)
-    }
-
+    
     return (
         <div class="center">
             <form onSubmit={formik.handleSubmit}>
@@ -58,7 +56,6 @@ const Login = () => {
                 
                 <button type="submit">Submit</button>
             </form>
-            <button type="submit" onClick={getData}>Show</button>
         </div>
     ); 
 };
