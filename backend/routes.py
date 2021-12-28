@@ -26,9 +26,8 @@ def signup():
         code = data['code']
         username = data['username']
         password = data['password']
-        role = 0
         
-        data_pair = signup_user(code,username,password,role)
+        data_pair = signup_user(code,username,password)
         
         answer = {"status": data_pair['status']}
         user = get_the_user(data_pair['user_id'])

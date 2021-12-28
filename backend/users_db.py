@@ -26,7 +26,7 @@ def create_user(role,n,k):
         print(e)
         return {"status": 0, "code": None}
 
-def signup_user(code,username,password,role):
+def signup_user(code,username,password):
     try:
         sql = "SELECT id FROM users WHERE username=:username"
         result = db.session.execute(sql, {"username":username})
@@ -47,8 +47,8 @@ def signup_user(code,username,password,role):
 
         hash_value = generate_password_hash(password)
         date = datetime.datetime.now()
-        sql = "UPDATE users SET active=:active, username=:username, password=:password, role=:role, date=:date, last_login=:last_login WHERE id=:id"
-        db.session.execute(sql, {"id":user_pair[0], "active":'true', "username": username, "password": hash_value, "role": role, "date": date, "last_login": date})
+        sql = "UPDATE users SET active=:active, username=:username, password=:password, date=:date, last_login=:last_login WHERE id=:id"
+        db.session.execute(sql, {"id":user_pair[0], "active":'true', "username": username, "password": hash_value, "date": date, "last_login": date})
         db.session.commit()
 
         return {"status": 1, "user_id": user_pair[0]}
