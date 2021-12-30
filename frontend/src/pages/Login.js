@@ -1,11 +1,13 @@
 import React from 'react';
-import { Navigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import { Formik, useFormik } from 'formik';
 import '../App.css';
 import axios from 'axios'
 const BACKEND_URL = 'http://127.0.0.1:5000/'
 
 const Login = () => {
+    const navigate = useNavigate()
+
     const formik = useFormik({
         initialValues: {
             username: '',
@@ -19,7 +21,7 @@ const Login = () => {
                 localStorage.setItem('username', res.data.username)
                 localStorage.setItem('role', res.data.role)
                 localStorage.setItem('misc', res.data.misc)
-                window.location.replace('/main')
+                navigate('/main')
                 notification = false 
             }
             if (notification) {

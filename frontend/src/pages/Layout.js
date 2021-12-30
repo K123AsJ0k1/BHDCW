@@ -1,10 +1,12 @@
-import React from 'react'
-import { Outlet, Link } from "react-router-dom";
+import React from 'react';
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import '../App.css';
 
 const Layout = () => {
+  let navigate = useNavigate()
   function logout() {
     localStorage.clear();
+    navigate('/')
     window.location.reload();
   }
 
