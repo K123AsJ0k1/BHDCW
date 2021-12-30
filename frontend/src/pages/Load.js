@@ -7,47 +7,58 @@ import axios from 'axios'
 const BACKEND_URL = 'http://127.0.0.1:5000/'
 
 const Load = () => {
-    let show = true
-    let navigate = useNavigate()
 
     const formik = useFormik({
         initialValues: {
-            text: ''
+            user_id: '',
+            name: '',
+            content: ''
         },
-        onSubmit: values => {
-            let res = axios.post(BACKEND_URL + 'load', values)
+        onSubmit: async (values) => {
+            values.user_id = localStorage.getItem('user_id')
+            let res = await axios.post(BACKEND_URL + 'load', values)
+            alert(res.data.status)
             console.log(res.data)
         },
     });
     
-    if (localStorage.getItem("username") === null || localStorage.getItem("user_id") === null || localStorage.getItem("role") === null) {
-       show = false
+    if (localStorage.getItem('username') === null || localStorage.getItem('user_id') === null || localStorage.getItem('role') === null) {
+        return (
+            <div class="center">
+            Load
+            </div>
+        );
     }
 
     if (localStorage.getItem("role") < 1) {
-        show = false 
-    }
-    
-    if (show) {
-        return(
-            <div className='center'>
-                <form onSubmit={formik.handleSubmit}>
-                    <textarea
-                        id="text"
-                        name="text"
-                        type="text"
-                        onChange={formik.handleChange}
-                        value={formik.values.text}    
-                    />
-                    <button type="submit">Submit</button>
-                </form>
+        return (
+            <div class="center">
+            Load
             </div>
-        )
+        );
     }
 
-    return (
-        <div class="center">
-        Load
+    return(
+        <div className='center'>
+            <form onSubmit={formik.handleSubmit}>
+                <input
+                    id="name"
+                    name="name"
+                    type="name"
+                    onChange={formik.handleChange}
+                    value={formik.values.name}
+                />
+
+                <textarea
+                    id="content"
+                    name="content"
+                    type="content"
+                    onChange={formik.handleChange}
+                    value={formik.values.content} 
+                />
+
+                <button type="submit">Submit</button>
+            </form>
         </div>
     );
 }

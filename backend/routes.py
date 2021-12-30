@@ -57,12 +57,8 @@ def login():
 def load():
     if request.method == "POST":
         data = request.get_json()
-
-        user_id = 0
-        text_id = 0
-        content = data['text']
+        print(data)
+        answer = load_text(data['user_id'],data['name'],data['content'])
         
-        #status = load_text()
-
-        return json.dumps({"Status": "Success"})
+        return jsonify(**answer)
 

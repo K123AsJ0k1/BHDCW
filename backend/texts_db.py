@@ -1,19 +1,28 @@
 from app import app
 from db import *
+from users_db import *
+import datetime
 
-def load_text(user_id, text_id, content):
+def load_text(user_id, name, content):
     try:
-        sql = "SELECT date FROM texts WHERE id=:text_id"
-        result = db.session.execute(sql, {"text_id": text_id})
+        user = get_the_user(user_id)
+
+        if user == None:
+            return {"status": "Submitter does not exist"}
+        
+        sql = "SELECT id FROM texts WHERE name=:name"
+        result = db.session.execute(sql, {"name":name})
         query = result.fetchone()
 
         if not query == None:
-            return -1
-
-        sql = "INSERT INTO texts (user_id, text_id, content) VALUES (:user_id,:text_id,:content)"
-        db.session.execute(sql, {"user_id":user_id, "text_id":text_id, "content":content})
+            return {"status": "Given name already exists"}
+        
+        creation_date = datetime.datetime.now()
+        sql = "INSERT INTO texts (user_id, name, content, creation_date) VALUES (:user_id,:name,:content,:creation_date)"
+        db.session.execute(sql, {"user_id":user_id, "name": name, "content":content, "creation_date":creation_date})
         db.session.commit()
-        return 1
+        
+        return {"status": "Text has been loaded"}
     except Exception as e:
         print(e)
-        return 0
+        return {"status": "Database error"}
