@@ -15,7 +15,7 @@ def setup():
             answer = data_pair
             return jsonify(**answer)
          
-        answer = {"status": -1}    
+        answer = {"status": "Setup is already complete"}    
         return jsonify(**answer)
 
 @app.route("/signup", methods = ['POST','GET'])

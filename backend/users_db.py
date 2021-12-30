@@ -21,10 +21,10 @@ def create_user(role,n,k):
         db.session.execute(sql, {"code": generated_code, "active": '0', "role": role})
         db.session.commit()
         
-        return {"status": 1, "code": generated_code}
+        return {"status": "User has been created", "code": generated_code}
     except Exception as e:
         print(e)
-        return {"status": 0, "code": None}
+        return {"status": "Database error", "code": None}
 
 def signup_user(code,username,password):
     try:
@@ -33,17 +33,17 @@ def signup_user(code,username,password):
         query = result.fetchone()
 
         if not query == None:
-            return {"status": -1, "user_id": 0}
+            return {"status": "Username already exists", "user_id": 0}
 
         sql = "SELECT id,active FROM users WHERE code=:code"
         result = db.session.execute(sql, {"code":code})
         user_pair = result.fetchone()
     
         if user_pair == None:
-            return {"status": -2, "user_id": 0}
+            return {"status": "Given code is incorrect", "user_id": 0}
 
         if user_pair[1]:
-            return {"status": -3, "user_id": 0}
+            return {"status": "The uses is already active", "user_id": 0}
 
         hash_value = generate_password_hash(password)
         date = datetime.datetime.now()
@@ -51,10 +51,10 @@ def signup_user(code,username,password):
         db.session.execute(sql, {"id":user_pair[0], "active":'true', "username": username, "password": hash_value, "date": date, "last_login": date})
         db.session.commit()
 
-        return {"status": 1, "user_id": user_pair[0]}
+        return {"status": "User has been activated", "user_id": user_pair[0]}
     except Exception as e:
         print(e)
-        return {"status": 0, "user_id": 0}
+        return {"status": "Database error", "user_id": 0}
 
 def login_user(username,password):
     try:
@@ -63,16 +63,16 @@ def login_user(username,password):
         user_pair = result.fetchone()
 
         if user_pair == None:
-            return {"status": -1, "user_id": 0}
+            return {"status": "Username does not exist", "user_id": 0}
         
         hash_value = user_pair[1]
         if not check_password_hash(hash_value,password):
-           return {"status": -2, "user_id": 0}
+           return {"status": "Incorrect password", "user_id": 0}
 
-        return {"status": 1, "user_id": user_pair[0]}
+        return {"status": "The user is logged in", "user_id": user_pair[0]}
     except Exception as e:
         print(e)
-        return {"status": 0, "user_id": 0}
+        return {"status": "Database error", "user_id": 0}
 
 def get_the_user(user_id):
     try:

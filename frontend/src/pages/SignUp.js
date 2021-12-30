@@ -38,23 +38,17 @@ const SignUp = () => {
         validate,
         onSubmit:async (values) => {
             let res = await axios.post(BACKEND_URL + 'signup', values)
-            if (res.data.status === 0) {
-                alert("Database error")
-            }
-            if (res.data.status === -1) {
-                alert("Username already exists") 
-            }
-            if (res.data.status === -2) {
-                alert("The given code is incorrect") 
-            }
-            if (res.data.status === -3) {
-                alert("The user is already activated")
-            }
-            if (res.data.status === 1) {
+            let notification = true
+            if (res.data.status === "User has been activated") {
                 localStorage.setItem('user_id', res.data.id)
                 localStorage.setItem('username', res.data.username)
                 localStorage.setItem('role', res.data.role)
                 localStorage.setItem('misc', res.data.misc)
+                window.location.replace('/main')
+                notification = false
+            }
+            if (notification) {
+                alert(res.data.status)
             }
             console.log(res.data)
         },
