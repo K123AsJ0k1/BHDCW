@@ -21,7 +21,7 @@ const Login = () => {
                 localStorage.setItem('username', res.data.username)
                 localStorage.setItem('role', res.data.role)
                 localStorage.setItem('misc', res.data.misc)
-                navigate('/main')
+                navigate('/home')
                 notification = false 
             }
             if (notification) {

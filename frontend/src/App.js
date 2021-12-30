@@ -5,11 +5,10 @@ import './App.css';
 import Layout from "./pages/Layout"
 import Welcome from "./pages/Welcome"
 import Setup from "./pages/Setup"
-import Main from "./pages/Main"
+import Home from "./pages/Home"
 import Login from "./pages/Login"
 import SignUp from "./pages/SignUp"
 import Load from "./pages/Load"
-import List from "./pages/List"
 import Tools from "./pages/Tools"
 import Forum from "./pages/Forum"
 import Download from "./pages/Download"
@@ -22,11 +21,10 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Welcome />} />
           <Route path="setup" element={<Setup />} />
-          <Route path="main" element={<Main />} />
+          <Route path="home" element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="load" element={<Load />} />
-          <Route path="list" element={<List />} />
           <Route path="tools" element={<Tools />} />
           <Route path="forum" element={<Forum />} />
           <Route path="download" element={<Download />} />

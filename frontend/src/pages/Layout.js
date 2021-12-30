@@ -29,13 +29,10 @@ const Layout = () => {
       <>
       <ul>
         <li>
-          <Link to="/main">Main</Link>
+          <Link to="/home">Home</Link>
         </li>
         <li>
           <Link to="/load">Load</Link>
-        </li>
-        <li>
-          <Link to="/list">List</Link>
         </li>
         <li>
           <Link to="/tools">Tools</Link>

@@ -44,7 +44,7 @@ const SignUp = () => {
                 localStorage.setItem('username', res.data.username)
                 localStorage.setItem('role', res.data.role)
                 localStorage.setItem('misc', res.data.misc)
-                window.location.replace('/main')
+                window.location.replace('/home')
                 notification = false
             }
             if (notification) {

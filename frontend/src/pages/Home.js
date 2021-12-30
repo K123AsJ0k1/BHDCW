@@ -4,13 +4,13 @@ import '../App.css';
 import axios from 'axios';
 const BACKEND_URL = 'http://127.0.0.1:5000/';
 
-const Main = () => {
+const Home = () => {
     return (
         <div class="center">
-        Main
+        Home
         </div>
     );
 };
   
-export default Main;
+export default Home;
   
