@@ -57,7 +57,7 @@ def login():
 def load():
     if request.method == "POST":
         data = request.get_json()
-        
+
         user_id = 0
         text_id = 0
         content = data['text']
