@@ -1,10 +1,14 @@
-from flask import request,jsonify
+from flask import request,jsonify,session
 from app import app
 from users_db import *
 from texts_db import *
 from user_creation import *
+from generator import *
 import re
 import json
+import jwt
+
+app.secret_key = getenv("SECRET_KEY")
 
 @app.route("/setup", methods = ['POST','GET'])
 def setup():
@@ -22,17 +26,22 @@ def setup():
 def signup():
     if request.method == 'POST':
         data = request.get_json()
-        
+        token = generate_token()
         code = data['code']
         username = data['username']
         password = data['password']
         
         data_pair = signup_user(code,username,password)
-        
         answer = {"status": data_pair['status']}
         user = get_the_user(data_pair['user_id'])
+        
         if not user == None:
-            answer.update(get_the_user(data_pair['user_id']))
+            session["token"] = token
+            session["user_id"] = user["id"]
+            session["username"] = user["username"]
+            session["role"] = user["role"]
+            answer.update({"token": token})
+            answer.update(user)
         
         return jsonify(**answer)
 
@@ -40,16 +49,21 @@ def signup():
 def login():
     if request.method == "POST":
         data = request.get_json()
-        
+        token = generate_token()
         username = data['username']
         password = data['password']
         
         data_pair = login_user(username,password)
-        
         answer = {"status": data_pair['status']}
         user = get_the_user(data_pair['user_id'])
+        
         if not user == None:
-            answer.update(get_the_user(data_pair['user_id']))
+            session["token"] = token
+            session["user_id"] = user["id"]
+            session["username"] = user["username"]
+            session["role"] = user["role"]
+            answer.update({"token": token})
+            answer.update(user)
         
         return jsonify(**answer)
 

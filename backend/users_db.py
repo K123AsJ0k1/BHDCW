@@ -1,6 +1,6 @@
 from app import app
 from db import *
-from code_generator import *
+from generator import *
 from werkzeug.security import check_password_hash, generate_password_hash
 import datetime
 
@@ -10,7 +10,7 @@ def create_user(role,n,k):
         sql = "SELECT id FROM users WHERE code=:code"
         
         while (True):
-            generated_code = generate(n,k)
+            generated_code = generate_code(n,k)
             result = db.session.execute(sql, {"code":generated_code})
             query = result.fetchone()
 

@@ -41,6 +41,9 @@ const Layout = () => {
           <Link to="/download">Download</Link>
         </li>
         <li>
+          <Link to="/tools">Tools</Link>
+        </li>
+        <li>
           <Link to="/profile">Profile</Link>
         </li>
         <li>
