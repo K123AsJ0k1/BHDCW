@@ -1,16 +1,24 @@
-import React from 'react';
-import { useFormik } from 'formik';
-import '../App.css';
-import axios from 'axios'
-const BACKEND_URL = 'http://127.0.0.1:5000/'
+import React from "react";
+import { useFormik } from "formik";
+import "../App.css";
+import axios from "axios"
+const BACKEND_URL = "http://127.0.0.1:5000/"
+
+const getHeader = () => {
+    const token = localStorage.getItem("token")
+    return {
+        "Authorization" : `Bearer ${token}`
+    }
+}
 
 const Tools = () => {
+    //const token = localStorage.getItem("token")
     const formik = useFormik({
         initialValues: {
-            rolename: '',
+            rolename: ""
         },
         onSubmit:async (values) => {
-            let res = await axios.post(BACKEND_URL + 'create', values)
+            let res = await axios.post(BACKEND_URL + "create", values, { headers: getHeader() })
             let notification = true
             if (res.data.status == "User has been created") {
                 alert(res.data.code)

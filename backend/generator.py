@@ -12,6 +12,6 @@ def generate_code(M, L):
         code = code + "-" + piece
     return code
 
-def generate_token():
+def generate_key():
     return ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(500))
 

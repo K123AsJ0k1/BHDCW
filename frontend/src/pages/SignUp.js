@@ -41,10 +41,6 @@ const SignUp = () => {
             let notification = true
             if (res.data.status === "User has been activated") {
                 localStorage.setItem("token", res.data.token)
-                localStorage.setItem('user_id', res.data.id)
-                localStorage.setItem('username', res.data.username)
-                localStorage.setItem('role', res.data.role)
-                localStorage.setItem('misc', res.data.misc)
                 window.location.replace('/home')
                 notification = false
             }

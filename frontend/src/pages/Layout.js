@@ -10,7 +10,7 @@ const Layout = () => {
     window.location.reload();
   }
 
-  if (localStorage.getItem("username") === null) {
+  if (localStorage.getItem("token") === null) {
     return (
       <>
       <ul>

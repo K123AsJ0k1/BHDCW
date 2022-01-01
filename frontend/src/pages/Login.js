@@ -18,10 +18,6 @@ const Login = () => {
             let notification = true
             if (res.data.status === "The user is logged in") {
                 localStorage.setItem("token", res.data.token)
-                localStorage.setItem("user_id", res.data.id)
-                localStorage.setItem("username", res.data.username)
-                localStorage.setItem("role", res.data.role)
-                localStorage.setItem("misc", res.data.misc)
                 navigate("/home")
                 notification = false 
             }
