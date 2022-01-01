@@ -35,16 +35,10 @@ const Layout = () => {
           <Link to="/load">Load</Link>
         </li>
         <li>
-          <Link to="/tools">Tools</Link>
-        </li>
-        <li>
           <Link to="/forum">Forum</Link>
         </li>
         <li>
           <Link to="/download">Download</Link>
-        </li>
-        <li>
-          <Link to="/editor">Editor</Link>
         </li>
         <li>
           <Link to="/profile">Profile</Link>
