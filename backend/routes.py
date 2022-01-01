@@ -13,15 +13,17 @@ app.secret_key = getenv("SECRET_KEY")
 @app.route("/setup", methods = ['POST','GET'])
 def setup():
     if request.method == 'GET':
-        data_pair = create_super_admin()
-        
-        if not data_pair == None:
-            answer = data_pair
-            return jsonify(**answer)
-         
-        answer = {"status": "Setup is already complete"}    
+        answer = create_rolename_user("Super admin")  
         return jsonify(**answer)
 
+@app.route("/create", methods = ['POST','GET'])
+def create():
+    if request.method == "POST":
+        data = request.get_json()
+        rolename = data["rolename"]
+        answer = create_rolename_user(rolename)   
+        return jsonify(**answer)
+        
 @app.route("/signup", methods = ['POST','GET'])
 def signup():
     if request.method == 'POST':
