@@ -12,7 +12,6 @@ const getHeader = () => {
 }
 
 const Tools = () => {
-    //const token = localStorage.getItem("token")
     const formik = useFormik({
         initialValues: {
             rolename: ""

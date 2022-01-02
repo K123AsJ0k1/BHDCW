@@ -6,37 +6,29 @@ import '../App.css';
 import axios from 'axios'
 const BACKEND_URL = 'http://127.0.0.1:5000/'
 
+const getHeader = () => {
+    const token = localStorage.getItem("token")
+    return {
+        "Authorization" : `Bearer ${token}`
+    }
+}
+
 const Load = () => {
     const formik = useFormik({
         initialValues: {
-            user_id: '',
             name: '',
             content: ''
         },
         onSubmit: async (values) => {
-            values.user_id = localStorage.getItem('user_id')
-            let res = await axios.post(BACKEND_URL + 'load', values)
-            alert(res.data.status)
+            let res = await axios.post(BACKEND_URL + 'load', values, { headers: getHeader() })
+            let notification = true
+            if (notification) {
+                alert(res.data.status)
+            }
             console.log(res.data)
         },
     });
     
-    if (localStorage.getItem('username') === null || localStorage.getItem('user_id') === null || localStorage.getItem('role') === null) {
-        return (
-            <div class="center">
-            Load
-            </div>
-        );
-    }
-
-    if (localStorage.getItem("role") < 1) {
-        return (
-            <div class="center">
-            Load
-            </div>
-        );
-    }
-
     return(
         <div className='center'>
             <form onSubmit={formik.handleSubmit}>

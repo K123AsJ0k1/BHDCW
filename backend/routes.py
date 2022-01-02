@@ -1,6 +1,6 @@
-from flask import request,jsonify,session
-from werkzeug.datastructures import Authorization
 from app import app
+from flask import redirect, jsonify, request, session
+from werkzeug.datastructures import Authorization
 from users_db import *
 from texts_db import *
 from user_creation import *
@@ -11,12 +11,11 @@ import re
 import json
 import jwt
 
-app.secret_key = getenv("SECRET_KEY")
-
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         token = None
+        
         if "Authorization" in request.headers:
             token = request.headers["Authorization"]
         
@@ -24,17 +23,15 @@ def token_required(f):
             return jsonify({"status": "Token is missing"})
         
         token = token.split(' ')[1]
-        authorization = True
+        user_id = 0
     
         try:
             data = jwt.decode(token, app.config['SECRET_KEY'], algorithms="HS256")
-            user = get_the_user(data["user_id"])
-            if user == None:
-                authorization = False
+            user_id = data["user_id"]
         except:
             return jsonify({"status": "Token is invalid"})
         
-        return f(authorization, *args, **kwargs)
+        return f(user_id, *args, **kwargs)
 
     return decorated
 
@@ -46,10 +43,7 @@ def setup():
 
 @app.route("/create", methods = ['POST','GET'])
 @token_required
-def create(authorization):
-    if not authorization:
-        return jsonify({"status": "No authorization"})
-
+def create(user_id):
     if request.method == "POST":
         data = request.get_json()    
         rolename = data["rolename"]
@@ -69,9 +63,8 @@ def signup():
         user = get_the_user(data_pair['user_id'])
         
         if not user == None:
-            #session["token_key"] = token_key
-            session["user_id"] = user["id"]
-            session["role"] = user["role"]
+            #session["user_id"] = user["id"]
+            #session["role"] = user["role"]
             token = jwt.encode({"user_id": user["id"], "exp": datetime.utcnow() + timedelta(minutes = 30)}, app.config['SECRET_KEY'], algorithm="HS256")
             answer.update({"token": "UTF-8"})
         
@@ -89,19 +82,18 @@ def login():
         user = get_the_user(data_pair['user_id'])
         
         if not user == None:
-            session["user_id"] = user["id"]
-            session["role"] = user["role"]
+            #session["user_id"] = user["id"]
+            #session["role"] = user["role"]
             token = jwt.encode({"user_id": user["id"], "exp": datetime.utcnow() + timedelta(minutes = 30)}, app.config['SECRET_KEY'], algorithm="HS256")
             answer.update({"token": token})
         
         return jsonify(**answer)
 
 @app.route("/load", methods = ['POST','GET'])
-def load():
+@token_required
+def load(user_id):
     if request.method == "POST":
         data = request.get_json()
-        print(data)
-        answer = load_text(data['user_id'],data['name'],data['content'])
-        
+        answer = load_text(user_id,data['name'],data['content'])
         return jsonify(**answer)
 
